@@ -4,7 +4,8 @@
 
 body {
   background: #eceef0;
-  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  /* Use the same serif family as headers for a cohesive look */
+  font-family: 'Lora', serif;
   color: #222;
   margin: 0;
   padding: 0;

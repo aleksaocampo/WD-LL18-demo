@@ -13,6 +13,51 @@ let currentRecipe = null;
 // Loading animation timer id for the friendly remix message
 let loadingTimer = null;
 
+// --- Simple sound effects (WebAudio) ---
+let audioCtx = null;
+function ensureAudioCtx() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+}
+
+function playTone(freq = 440, duration = 0.12, type = 'sine', volume = 0.08) {
+  try {
+    ensureAudioCtx();
+    const ctx = audioCtx;
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = type;
+    o.frequency.value = freq;
+    g.gain.value = 0;
+    o.connect(g);
+    g.connect(ctx.destination);
+    const now = ctx.currentTime;
+    g.gain.cancelScheduledValues(now);
+    g.gain.setValueAtTime(0, now);
+    g.gain.linearRampToValueAtTime(volume, now + 0.01);
+    o.start(now);
+    g.gain.linearRampToValueAtTime(0.0001, now + duration);
+    o.stop(now + duration + 0.02);
+  } catch (e) {
+    // ignore audio errors (e.g., blocked autoplay)
+    console.debug('audio error', e);
+  }
+}
+
+function playClickSound() {
+  // bright two-tone chime
+  playTone(880, 0.08, 'sine', 0.06);
+  setTimeout(() => playTone(1100, 0.12, 'sine', 0.05), 90);
+}
+
+function playRefreshSound() {
+  // lower short swoop
+  playTone(420, 0.09, 'triangle', 0.06);
+  setTimeout(() => playTone(520, 0.12, 'sine', 0.05), 90);
+}
+
 function startLoadingMessage() {
   if (!remixOutput) return;
   let dots = 0;
@@ -177,8 +222,8 @@ async function fetchAndDisplayRecipeByName(name) {
 
 // --- Event listeners ---
 
-// When the button is clicked, get and show a new random recipe
-randomBtn.addEventListener("click", fetchAndDisplayRandomRecipe);
+// When the button is clicked, get and show a new random recipe (play a sound first)
+if (randomBtn) randomBtn.addEventListener("click", () => { playRefreshSound(); fetchAndDisplayRandomRecipe(); });
 
 // When the page loads, show a random recipe right away
 document.addEventListener("DOMContentLoaded", fetchAndDisplayRandomRecipe);
@@ -189,6 +234,9 @@ async function remixCurrentRecipe() {
     remixOutput.textContent = 'No recipe loaded yet. Click "Surprise Me Again!" to fetch one.';
     return;
   }
+
+  // Play a short feedback sound when the user clicks Remix
+  playClickSound();
 
   const theme = remixTheme ? remixTheme.value : '';
   startLoadingMessage();
