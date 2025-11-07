@@ -3,7 +3,7 @@
 }
 
 body {
-  background: #eceef0;
+  background: #f3e9dc;
   /* Use the same serif family as headers for a cohesive look */
   font-family: 'Lora', serif;
   color: #222;
@@ -33,7 +33,8 @@ h1 {
   margin-bottom: 0;
   font-size: 52px;
   font-weight: bold;
-  color: #4568dc;
+  /* deep maroon from palette */
+  color: #7d4f50;
   letter-spacing: 0;
   line-height: 1.15;
   display: flex;
@@ -70,10 +71,11 @@ p {
   line-height: 1.5;
 }
 
+/* Primary action button uses warm palette (tan -> pink) */
 #random-btn {
   margin: 0 auto 10px auto;
   display: block;
-  background: linear-gradient(90deg, #5a6fff 0%, #7092ff 100%);
+  background: linear-gradient(90deg, #d1be9c 0%, #cc8b86 100%);
   color: #fff;
   border: none;
   border-radius: 28px;
@@ -82,24 +84,24 @@ p {
   font-family: inherit;
   font-weight: 800;
   letter-spacing: 1px;
-  box-shadow: 0 6px 28px rgba(70, 100, 220, 0.12);
+  box-shadow: 0 6px 28px rgba(125,79,80,0.12);
   cursor: pointer;
   transition: background 0.18s, transform 0.12s, box-shadow 0.18s;
 }
 #random-btn:hover, #random-btn:focus {
-  background: linear-gradient(90deg, #7092ff 0%, #5a6fff 100%);
+  background: linear-gradient(90deg, #cc8b86 0%, #7d4f50 100%);
   transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 8px 32px rgba(90, 110, 255, 0.16);
+  box-shadow: 0 8px 32px rgba(125,79,80,0.16);
 }
 #random-btn:active {
-  background: #4669cc;
+  background: #7d4f50;
   transform: scale(0.98);
 }
 
 #recipe-display {
-  background: linear-gradient(180deg, #ffffff, #fbfdff);
+  background: #fffaf7; /* match saved list solid background */
   border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(60,90,180,0.06);
+  box-shadow: 0 8px 30px rgba(125,79,80,0.06);
   padding: 26px 26px 22px 26px;
 }
 #recipe-display img {
@@ -120,14 +122,14 @@ p {
 }
 #recipe-display h3 {
   margin-bottom: 4px;
-  color: #4568dc;
+  color: #cc8b86; /* soft pink accent */
   font-size: 18px;
 }
 
 .remix-container {
-  background: linear-gradient(180deg, #ffffff, #fbfdff);
+  background: #fffaf7; /* match saved list solid background */
   border-radius: 12px;
-  box-shadow: 0 6px 26px rgba(70,100,220,0.06);
+  box-shadow: 0 6px 26px rgba(125,79,80,0.06);
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -157,36 +159,37 @@ p {
 }
 
 .accent-btn {
-  background: #7092ff;
-  color: #fff;
+  background: linear-gradient(90deg,#d1be9c 0%, #cc8b86 100%);
+  color: #7d4f50;
   border-radius: 8px;
   padding: 10px 20px;
   font-size: 16px;
   font-weight: 700;
   border: none;
-  box-shadow: 0 2px 8px rgba(70,100,220,0.07);
+  box-shadow: 0 2px 8px rgba(125,79,80,0.07);
   cursor: pointer;
-  transition: background 0.18s;
+  transition: background 0.18s, transform 0.12s;
   align-self: center;
   max-width: 100%;
   white-space: nowrap;
 }
 .accent-btn:hover,
 .accent-btn:focus {
-  background: #5a6fff;
+  background: linear-gradient(90deg,#cc8b86 0%, #7d4f50 100%);
+  transform: translateY(-2px);
 }
 .accent-btn:active {
-  background: #4669cc;
+  background: #7d4f50;
 }
 
 .remix-box {
-  background: linear-gradient(180deg,#f7f9ff,#f5f7fa);
+  background: #fffaf7; /* match saved list solid background */
   border-radius: 12px;
   padding: 18px;
   margin-top: 16px;
   font-size: 16.5px;
-  color: #344059;
-  border: 1px solid rgba(225,230,245,0.8);
+  color: #7d4f50;
+  border: 1px solid rgba(209,190,156,0.6);
   min-height: 56px;
   white-space: pre-line;
   transition: transform 0.12s ease, box-shadow 0.12s ease;
@@ -194,7 +197,7 @@ p {
 .remix-box:focus {
   outline: none;
   transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(60,90,180,0.06);
+  box-shadow: 0 8px 24px rgba(125,79,80,0.06);
 }
 
 /* Icon styles */
@@ -265,9 +268,9 @@ p {
   list-style: none;
   padding: 0;
   margin: 0;
-  background: #fff;
+  background: #fffaf7;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(70,100,220,0.06);
+  box-shadow: 0 2px 8px rgba(125,79,80,0.06);
   overflow: hidden;
 }
 
@@ -287,14 +290,14 @@ p {
   text-align: left;
   flex: 1 1 auto;
   font-size: 17px;
-  color: #3b5aa6;
+  color: #7d4f50;
   cursor: pointer;
   transition: color 0.12s, transform 0.12s;
   padding: 4px 0;
 }
 .saved-recipe-item span:hover,
 .saved-recipe-item span:focus {
-  color: #5a6fff;
+  color: #cc8b86;
   text-decoration: underline;
 }
 
